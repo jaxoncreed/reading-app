@@ -1,43 +1,28 @@
-# meteor-react-boilerplate
-A starter project for React &amp; Meteor
+# The Meteor Chef - Base
+A starting point for Meteor apps.
 
-This repo aims to get you up and running with with React with little effort. It has sane defaults that
-most apps will use (router, accounts).
+---
+#### Deprecation Warning
 
-Most of the content is in the 'imports' folder so that we can so serverside rendering more easily. Here's the
-rundown on what's included.
+Base has been deprecated, but don't panic! It just has a new name, [Pup](http://cleverbeagle.com/pup), and it's getting more attention from our new company [Clever Beagle](http://cleverbeagle.com).
 
-For an in-depth example of how to use Meteor with React see
-[React-ive Meteor](https://github.com/AdamBrodzinski/react-ive-meteor). For flux support see the [Flux Leaderboard](https://github.com/AdamBrodzinski/meteor-flux-leaderboard) example app.
+[Star Pup on GitHub](http://github.com/cleverbeagle/pup)
 
-#### APIs & Packages
-- [Session](https://docs.meteor.com/api/session.html)
-- [Logging](https://atmospherejs.com/meteor/logging)
-- [Reload](https://atmospherejs.com/meteor/reload)
-- [Random](https://docs.meteor.com/packages/random.html)
-- [EJSON](https://docs.meteor.com/api/ejson.html)
-- [Spacebars](https://docs.meteor.com/packages/spacebars.html)
-- [Check](https://docs.meteor.com/api/check.html)
-- [Accounts Password](http://docs.meteor.com/api/passwords.html)
-- [Accounts UI](https://docs.meteor.com/packages/accounts-ui.html) (with React wrapper)
-- [gadicc:blaze-react-component](https://github.com/gadicc/meteor-blaze-react-component/)
+_Psst: more information on this change [is available here](https://themeteorchef.com/blog/the-future-of-the-meteor-chef)_.
 
-#### NPM
-- React
-- React DOM
-- [React Router](https://github.com/reactjs/react-router)
-- [Classnames](https://github.com/JedWatson/classnames)
-- [History](https://github.com/ReactTraining/history)
+---
 
-#### Components
-- Header
-- LoginButtons
+<table>
+  <tbody>
+    <tr>
+      <th>Base Version</th>
+      <td>v4.15.0</td>
+    </tr>
+    <tr>
+      <th>Meteor Version</th>
+      <td>v1.4.4.1</td>
+    </tr>
+  </tbody>
+</table>
 
-#### Models
-- User
-- (See a more [complex example](https://github.com/AdamBrodzinski/react-ive-meteor/blob/master/both/models/post.js))
-
-#### Pages/Routes
-- Home, About
-- Not Found
-- Main Layout
+[Read the Documentation](http://themeteorchef.com/base)
