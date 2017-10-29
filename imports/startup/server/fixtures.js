@@ -22,7 +22,7 @@ if (!Meteor.isProduction) {
       },
     },
     {
-      email: 'li@newspaper.edu',
+      email: 'li@newspaper.com',
       password: 'password',
       profile: {
         first: 'Mrs.',
@@ -31,6 +31,19 @@ if (!Meteor.isProduction) {
         role: {
           type: 'parent',
           children: ['wanda'],
+        },
+      },
+    },
+    {
+      email: 'perlstein@place.com',
+      password: 'password',
+      profile: {
+        first: 'Mr.',
+        last: 'Perlstein',
+        username: 'perlstein',
+        role: {
+          type: 'parent',
+          children: ['arnold'],
         },
       },
     },
@@ -163,14 +176,31 @@ if (!Meteor.isProduction) {
       {
         recommender: 'friz',
         recommenderRole: 'teacher',
-        book: '1342',
+        book: '16',
+      },
+      {
+        recommender: 'friz',
+        recommenderRole: 'teacher',
+        book: '55',
+      },
+      {
+        recommender: 'friz',
+        recommenderRole: 'teacher',
+        book: '74',
       },
     ];
     if (studentName === 'wanda') {
       assignments.push({
-        recomender: 'li',
+        recommender: 'li',
         recommenderRole: 'parent',
-        book: '1342',
+        book: '76',
+      });
+    }
+    if (studentName === 'arnold') {
+      assignments.push({
+        recommender: 'perlstein',
+        recommenderRole: 'parent',
+        book: '147',
       });
     }
     return {

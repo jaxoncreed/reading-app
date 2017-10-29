@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import container from '../../modules/container';
 import AssignmentSet from '../../api/AssignmentSet';
 import Book from '../../api/BookMeta';
-import { Button } from 'react-bootstrap';
+import { Button, Panel } from 'react-bootstrap';
 
 const Assignment = ({ books, assignmentUsernames, profile }) => {
 
@@ -12,9 +12,12 @@ const Assignment = ({ books, assignmentUsernames, profile }) => {
       <h4 className="page-header">Books</h4>
       {books.map((book) => {
         return (
-          <Button onClick={() => {
-            Meteor.call('addAssignment', assignmentUsernames, book._id, profile);
-          }}>Add {book.title} to class</Button>
+          <Panel>
+            <h5>{book.title}</h5>
+            <Button onClick={() => {
+              Meteor.call('addAssignment', assignmentUsernames, book._id, profile);
+            }}>Assign to {profile.role.type === 'teacher' ? 'Class' : 'Child' }</Button>
+          </Panel>
         )
       })}
     </div>

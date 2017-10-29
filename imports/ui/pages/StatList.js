@@ -1,10 +1,10 @@
-import { Button, ButtonToolbar, Panel } from 'react-bootstrap';
+import { Button, ButtonGroup, Panel } from 'react-bootstrap';
 import { VictoryChart, VictoryArea, VictoryAxis, VictoryTheme } from 'victory';
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import container from '../../modules/container';
 import BookStat from '../../api/BookStat';
-import Book from '../../api/Book';
+import Book from '../../api/BookMeta';
 
 
 
@@ -17,11 +17,10 @@ class StatList extends Component {
   render() {
     const bookData = (this.props.bookStats) ? this.props.bookStats.sort((a, b) => a[this.state.sort] > b[this.state.sort] ? 1 : -1) : [];
 
-    console.log(bookData);
     return (
       <div className="StatList">
         <h4 className="page-header">Your Student's Readings</h4>
-        <ButtonToolbar>
+        <ButtonGroup style={{ marginBottom: '10px' }}>
           <Button bsStyle={this.state.sort === 'username' ? 'primary' : 'default'}
               onClick={() => this.setState({ sort: 'username' })}>
             Sort by Student
@@ -30,7 +29,7 @@ class StatList extends Component {
               onClick={() => this.setState({ sort: 'book' })}>
             Sort by Book
           </Button>
-        </ButtonToolbar>
+        </ButtonGroup>
         {bookData.map((data) => (
           <Panel>
             <h5>{data.username}'s progress on {this.props.bookMetaData[data.book].title}</h5>

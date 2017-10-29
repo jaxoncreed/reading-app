@@ -10,10 +10,10 @@ import container from '../../modules/container';
 const renderNavigation = hasUser => (hasUser ? <AuthenticatedNavigation /> : <PublicNavigation />);
 
 const AppNavigation = ({ hasUser }) => (
-  <Navbar>
+  <Navbar className="navbar-fixed-top">
     <Navbar.Header>
       <Navbar.Brand>
-        <Link to="/">Application Name</Link>
+        <Link to="/">ReadMe</Link>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>

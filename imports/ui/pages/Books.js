@@ -3,8 +3,10 @@ import { Meteor } from 'meteor/meteor';
 import container from '../../modules/container';
 import AssignmentSet from '../../api/AssignmentSet';
 import Book from '../../api/BookMeta';
+import {Panel} from 'react-bootstrap';
+import { Link } from 'react-router';
 
-const Books = ({ assignmentSet, bookMetaData }) => {
+const Books = ({ assignmentSet, bookMetaData, role }) => {
   const recommenderMap = {};
 
   assignmentSet.forEach((assignmentPairing) => {
@@ -15,7 +17,7 @@ const Books = ({ assignmentSet, bookMetaData }) => {
           recommenderMap[assignment.recommender]
               .assignments[assignment.book].students.push(student);
         } else {
-          recommenderMap[assignment.recommender].assignment[assignment.book] = {
+          recommenderMap[assignment.recommender].assignments[assignment.book] = {
             book: assignment.book,
             students: [student],
           }
@@ -36,12 +38,20 @@ const Books = ({ assignmentSet, bookMetaData }) => {
 
   return (
     <div className="Books">
-      <h4 className="page-header">Books</h4>
       {Object.values(recommenderMap).map((recommenderAssignmentPair) => (
         <div>
-          <h1>{recommenderAssignmentPair.recommender}</h1>
+          <h4 className="page-header">Books assigned by {recommenderAssignmentPair.recommender}</h4>
           {Object.values(recommenderAssignmentPair.assignments).map((assignment) => {
-            return (<p>{assignment.book} {assignment.students.join(', ')} {bookMetaData[assignment.book].title}</p>);
+            return (
+              <Link to={'/read/' + assignment.book}>
+                <Panel>
+                  <h5>{bookMetaData[assignment.book].title}</h5>
+                  <p>{bookMetaData[assignment.book].author[0]}</p>
+                  {role === 'teacher' && <p>Students Assigned: {assignment.students.join(', ')}</p>}
+                  {role === 'parent' && <p>Children Assigned: {assignment.students.join(', ')}</p>}
+                </Panel>
+              </Link>
+            );
           })}
         </div>
       ))}
@@ -93,7 +103,7 @@ export default container((props, onData) => {
         const bookMap = {};
         Book.find({}, { body: 0 }).fetch().forEach(book => bookMap[book._id] = book);
         console.log(bookMap);
-        onData(null, { assignmentSet, bookMetaData: bookMap });
+        onData(null, { assignmentSet, bookMetaData: bookMap, role: user.profile.role.type });
       }
     }
   }

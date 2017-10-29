@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import container from '../../modules/container';
 import Book from '../../api/Book';
 import BookStat from '../../api/BookStat';
+import { Button, ButtonGroup } from 'react-bootstrap';
 
 import throttle from 'lodash.throttle';
 
@@ -23,7 +24,6 @@ class Read extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.follow);
     if ((!this.props.bookStat && nextProps.bookStat) || (nextProps.follow && nextProps.follow !== 'self')) {
       // Meteor.call('startSession', nextProps.bookStat);
 
@@ -33,8 +33,6 @@ class Read extends Component {
       if (bookStat.readingSessions[bookStat.readingSessions.length - 1]) {
         beginPercent = bookStat.readingSessions[bookStat.readingSessions.length - 1].percent;
       }
-
-      console.log(beginPercent);
 
       const h = document.documentElement;
       const b = document.body;
@@ -50,10 +48,27 @@ class Read extends Component {
 
 
   render() {
+    const follow = this.props.follow;
     return (
       <div className="Books">
         <h4 className="page-header">{this.props.book.title}</h4>
         <pre>{this.props.book.body.body}</pre>
+        {this.props.role === 'student' && (
+          <div className="bottomCorner">
+            <ButtonGroup>
+              <Button bsStyle={(!follow || follow === 'self') ? 'primary' : 'default'}
+                  href={'/read/' + this.props.book._id}>
+                Read Alone
+              </ Button>
+              {this.props.canFollow.map((userToFollow) => (
+                <Button bsStyle={(follow === userToFollow) ? 'primary' : 'default'}
+                    href={'/read/' + this.props.book._id + '?follow=' + userToFollow}>
+                  Read with {userToFollow}
+                </ Button>
+              ))}
+            </ButtonGroup>
+          </div>
+        )}
       </div>
     );
   }
@@ -87,6 +102,8 @@ export default container((props, onData) => {
           book,
           bookStat,
           username: user.profile.username,
+          role: user.profile.role.type,
+          canFollow: (user.profile.role.type === 'student') ? user.profile.role.teachers.concat(user.profile.role.parents) : [],
           follow,
           percent: (bookStat && bookStat.readingSessions[bookStat.readingSessions.length - 1]) ? bookStat.readingSessions[bookStat.readingSessions.length - 1].percent : 0,
         });

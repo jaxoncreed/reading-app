@@ -25,7 +25,7 @@ Meteor.methods({
           recommenderRole: recommender.role.type,
         },
       },
-    });
+    }, { multi: true });
   },
 });
 

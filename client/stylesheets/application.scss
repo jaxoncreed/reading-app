@@ -8,3 +8,9 @@
 @import "module/Signup";
 
 @import "state/Navbar";
+
+.bottomCorner {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}

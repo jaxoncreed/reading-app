@@ -6,7 +6,7 @@ import AppNavigation from '../components/AppNavigation';
 const App = ({ children }) => (
   <div>
     <AppNavigation />
-    <Grid>
+    <Grid style={{ marginTop: '65px' }}>
       { children }
     </Grid>
   </div>
