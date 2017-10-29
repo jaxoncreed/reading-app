@@ -68,6 +68,7 @@
     "bootstrap": "^3.3.7",
     "jquery": "^2.2.4",
     "jquery-validation": "^1.15.1",
+    "lodash.throttle": "^4.1.1",
     "meteor-node-stubs": "^0.2.6",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
