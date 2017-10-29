@@ -13,7 +13,7 @@ if (!Meteor.isProduction) {
         username: 'friz',
         role: {
           type: 'teacher',
-          studentes: ['arnold', 'carlos', 'dorthyann', 'keesha', 'phoebe', 'ralphie', 'tim', 'wanda'],
+          students: ['arnold', 'carlos', 'dorthyann', 'keesha', 'phoebe', 'ralphie', 'tim', 'wanda'],
         },
       },
     },
@@ -159,16 +159,16 @@ if (!Meteor.isProduction) {
       {
         recommender: 'friz',
         recommenderRole: 'teacher',
-        bookstat: 'someId',
-        book: 'someId',
+        bookstat: 'theFrizsBook',
+        book: 'theFrizsBook',
       },
     ];
     if (studentName === 'wanda') {
       assignments.push({
         recomender: 'li',
         recommenderRole: 'parent',
-        bookstat: 'someId',
-        book: 'someId',
+        bookstat: 'lisBook',
+        book: 'lisBook',
       });
     }
     return {
