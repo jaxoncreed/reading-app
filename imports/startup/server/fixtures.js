@@ -1,6 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import AssignmentSet from '../../api/AssignmentSet';
+import Book from '../../api/Book';
+import BookStat from '../../api/BookStat';
+import fs from 'fs';
 
 if (!Meteor.isProduction) {
   const users = [
@@ -160,7 +163,7 @@ if (!Meteor.isProduction) {
         recommender: 'friz',
         recommenderRole: 'teacher',
         bookstat: 'theFrizsBook',
-        book: 'theFrizsBook',
+        book: '1342',
       },
     ];
     if (studentName === 'wanda') {
@@ -168,7 +171,7 @@ if (!Meteor.isProduction) {
         recomender: 'li',
         recommenderRole: 'parent',
         bookstat: 'lisBook',
-        book: 'lisBook',
+        book: '1342',
       });
     }
     return {
@@ -185,4 +188,15 @@ if (!Meteor.isProduction) {
       AssignmentSet.insert(assignmentSet);
     }
   });
+
+
+  // Initialize books
+  const doesBookExist = Book.findOne();
+
+  if (!doesBookExist) {
+    const books = require('./JSONData.json');
+    books.forEach((book) => {
+      Book.insert(book);
+    });
+  }
 }
