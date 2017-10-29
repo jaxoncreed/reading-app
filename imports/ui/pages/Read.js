@@ -23,6 +23,19 @@ class Read extends Component {
   componentWillReceiveProps(nextProps) {
     if (!this.props.bookStat && nextProps.bookStat) {
       Meteor.call('startSession', nextProps.bookStat);
+
+      const bookStat = nextProps.bookStat;
+      let beginPercent = 0;
+      if (bookStat.readingSessions[bookStat.readingSessions.length - 1] &&
+            bookStat.readingSessions[bookStat.readingSessions.length - 1].endPercent) {
+        beginPercent = bookStat.readingSessions[bookStat.readingSessions.length - 1].endPercent;
+      }
+
+      const h = document.documentElement;
+      const b = document.body;
+      const st = 'scrollTop';
+      const sh = 'scrollHeight';
+      h[st] = b[st] = (beginPercent / 100) * ((h[sh]||b[sh]) - h.clientHeight);
     }
   }
 

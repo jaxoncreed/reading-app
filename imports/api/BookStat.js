@@ -10,7 +10,7 @@ if (Meteor.isServer) {
     check(username, String);
     check(book, String);
     const bookStat = BookStat.find({ username, book });
-    if (bookStat) {
+    if (bookStat.count() > 0) {
       return bookStat;
     }
     const toInsert = {
@@ -20,6 +20,10 @@ if (Meteor.isServer) {
     };
     BookStat.insert(toInsert);
     return BookStat.find({ username, book });
+  });
+  Meteor.publish('bookStatReport', (userIds) => {
+    check(userIds, Array);
+    return BookStat.find({ username: { $in: userIds } });
   });
 }
 
