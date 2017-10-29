@@ -15,13 +15,16 @@ const AuthenticatedNavigation = () => {
   const profile = getProfile();
   return (
     <div>
-      <Nav>
-        {(profile.role.type === 'teacher' || profile.role.type === 'parent') && (
+      {(profile.role.type === 'teacher' || profile.role.type === 'parent') && (
+        <Nav>
           <LinkContainer to="/stats">
             <NavItem eventKey={ 2 } href="/stats">Statistics</NavItem>
           </LinkContainer>
-        )}
-      </Nav>
+          <LinkContainer to="/assignment">
+            <NavItem eventKey={ 2 } href="/assignment">Assignments</NavItem>
+          </LinkContainer>
+        </Nav>
+      )}
       <Nav pullRight>
         <NavDropdown eventKey={ 3 } title={ profile.username } id="basic-nav-dropdown">
           <MenuItem eventKey={ 3.1 } onClick={ handleLogout }>Logout</MenuItem>

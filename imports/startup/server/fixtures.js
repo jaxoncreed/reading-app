@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import AssignmentSet from '../../api/AssignmentSet';
 import Book from '../../api/Book';
+import BookMeta from '../../api/BookMeta';
 import BookStat from '../../api/BookStat';
 import fs from 'fs';
 
@@ -162,7 +163,6 @@ if (!Meteor.isProduction) {
       {
         recommender: 'friz',
         recommenderRole: 'teacher',
-        bookstat: 'theFrizsBook',
         book: '1342',
       },
     ];
@@ -170,7 +170,6 @@ if (!Meteor.isProduction) {
       assignments.push({
         recomender: 'li',
         recommenderRole: 'parent',
-        bookstat: 'lisBook',
         book: '1342',
       });
     }
@@ -196,7 +195,9 @@ if (!Meteor.isProduction) {
   if (!doesBookExist) {
     const books = require('./JSONData.json');
     books.forEach((book) => {
+      const { body, ...withoutBody } = book;
       Book.insert(book);
+      BookMeta.insert(withoutBody);
     });
   }
 }

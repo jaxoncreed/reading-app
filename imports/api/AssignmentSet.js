@@ -12,4 +12,21 @@ if (Meteor.isServer) {
   });
 }
 
+Meteor.methods({
+  addAssignment: (students, book, recommender) => {
+    check(students, Array);
+    check(book, String);
+    check(recommender, Object);
+    AssignmentSet.update({ username: { $in: students } }, {
+      $push: {
+        assignments: {
+          book,
+          recommender: recommender.username,
+          recommenderRole: recommender.role.type,
+        },
+      },
+    });
+  },
+});
+
 export default AssignmentSet;

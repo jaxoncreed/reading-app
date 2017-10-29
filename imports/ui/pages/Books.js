@@ -2,7 +2,7 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import container from '../../modules/container';
 import AssignmentSet from '../../api/AssignmentSet';
-import Book from '../../api/Book';
+import Book from '../../api/BookMeta';
 
 const Books = ({ assignmentSet, bookMetaData }) => {
   const recommenderMap = {};
@@ -91,7 +91,8 @@ export default container((props, onData) => {
       const bookSubscription = Meteor.subscribe('bookMetaData', Array.from(bookIds));
       if (bookSubscription.ready()) {
         const bookMap = {};
-        Book.find().fetch().forEach(book => bookMap[book._id] = book);
+        Book.find({}, { body: 0 }).fetch().forEach(book => bookMap[book._id] = book);
+        console.log(bookMap);
         onData(null, { assignmentSet, bookMetaData: bookMap });
       }
     }
