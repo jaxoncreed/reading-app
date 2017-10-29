@@ -33,7 +33,6 @@ const Books = ({ assignmentSet, bookMetaData }) => {
       }
     });
   });
-  console.log(JSON.stringify(recommenderMap, null, 2));
 
   return (
     <div className="Books">
