@@ -43,10 +43,7 @@ Meteor.methods({
     check(bookStat, Object);
     check(endPercent, Number);
     BookStat.update({ _id: bookStat._id }, {
-      $set: {
-        ['readingSessions.' + (bookStat.readingSessions.length - 1) + '.end']: Date.now(),
-        ['readingSessions.' + (bookStat.readingSessions.length - 1) + '.endPercent']: endPercent,
-      },
+      $push: { readingSessions: { percent: endPercent, timestamp: Date.now() } }
     });
   },
 });

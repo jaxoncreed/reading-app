@@ -22,13 +22,12 @@ class Read extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.bookStat && nextProps.bookStat) {
-      Meteor.call('startSession', nextProps.bookStat);
+      // Meteor.call('startSession', nextProps.bookStat);
 
       const bookStat = nextProps.bookStat;
       let beginPercent = 0;
-      if (bookStat.readingSessions[bookStat.readingSessions.length - 1] &&
-            bookStat.readingSessions[bookStat.readingSessions.length - 1].endPercent) {
-        beginPercent = bookStat.readingSessions[bookStat.readingSessions.length - 1].endPercent;
+      if (bookStat.readingSessions[bookStat.readingSessions.length - 1]) {
+        beginPercent = bookStat.readingSessions[bookStat.readingSessions.length - 1].percent;
       }
 
       const h = document.documentElement;
